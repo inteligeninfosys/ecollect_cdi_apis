@@ -5,3 +5,5 @@ export * from './activitylogs.repository';
 export * from './notehis.repository';
 export * from './ptps.repository';
 export * from './payments.repository';
+export * from './users.repository';
+export * from './signininvites.repository';

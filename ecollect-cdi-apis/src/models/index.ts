@@ -5,3 +5,5 @@ export * from './activitylogs.model';
 export * from './notehis.model';
 export * from './ptps.model';
 export * from './payments.model';
+export * from './users.model';
+export * from './signininvites.model';

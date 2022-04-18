@@ -6,3 +6,5 @@ export * from './activitylogs.controller';
 export * from './notehis.controller';
 export * from './ptps.controller';
 export * from './payments.controller';
+export * from './users.controller';
+export * from './signininvites.controller';
