@@ -9,6 +9,7 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {MysqlDataSource} from './datasources';
 
 export {ApplicationConfig};
 
@@ -17,6 +18,27 @@ export class EcollectCdiApisApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    const db_host = process.env.DB_HOST ?? '127.0.0.1';
+    const db_port = process.env.DB_PORT ?? 3360;
+    const db_user = process.env.DB_USERNAME ?? 'root';
+    const db_pass = process.env.DB_PASSWORD ?? 'abc.123';
+    const database = process.env.DB_DATABASE ?? 'ecol';
+
+    this.bind('datasources.config.mysql').to({
+      name: 'mysql',
+      connector: 'mysql',
+      url: '',
+      host: db_host,
+      port: db_port,
+      user: db_user,
+      password: db_pass,
+      database: database,
+      useNewUrlParser: true,
+      maxOfflineRequests: 20
+    });
+    this.bind('datasources.mysql').toClass(MysqlDataSource);
+
 
     // Set up the custom sequence
     this.sequence(MySequence);

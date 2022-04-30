@@ -7,3 +7,4 @@ export * from './ptps.model';
 export * from './payments.model';
 export * from './users.model';
 export * from './signininvites.model';
+export * from './teles.model';

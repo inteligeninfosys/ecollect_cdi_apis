@@ -188,7 +188,6 @@ export class TqallController {
 
     const SQL = selectSql + fromSql + whereSql + groupBySql + orderBySql + limitSql;
 
-    console.log(SQL);
 
     return SQL;
   }
