@@ -9,3 +9,6 @@ export * from './payments.controller';
 export * from './users.controller';
 export * from './signininvites.controller';
 export * from './teles.controller';
+export * from './uploads.controller';
+export * from './excuse.controller';
+export * from './excusedetailed.controller';

@@ -5,11 +5,12 @@ import {Entity, model, property} from '@loopback/repository';
     strict: true,
     mysql: {
       schema: 'ecol',
-      table: "signininvites"
+      table: "uploads"
     }
   }
 })
-export class Signininvites extends Entity {
+
+export class Uploads extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -21,71 +22,62 @@ export class Signininvites extends Entity {
     type: 'string',
     required: true,
   })
-  username: string;
+  custnumber: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  accnumber: string;
 
   @property({
     type: 'string',
   })
-  emailaddress?: string;
-
-  @property({
-    type: 'date',
-  })
-  invitedate?: string;
+  doctype?: string;
 
   @property({
     type: 'string',
   })
-  inviteexpiry?: string;
+  docdesc?: string;
 
   @property({
     type: 'string',
   })
-  inviteby?: string;
+  destpath?: string;
 
   @property({
     type: 'string',
   })
-  completed?: string;
+  colofficer?: string;
 
   @property({
     type: 'string',
   })
-  invitetype?: string;
+  filetype?: string;
+
+  @property({
+    type: 'string',
+  })
+  filename?: string;
+
+  @property({
+    type: 'string',
+  })
+  filesize?: string;
 
   @property({
     type: 'date',
   })
   lastupdate?: string;
 
-  @property({
-    type: 'string',
-  })
-  firstname?: string;
 
-  @property({
-    type: 'string',
-  })
-  surname?: string;
-
-  @property({
-    type: 'string',
-  })
-  lastname?: string;
-
-  @property({
-    type: 'string',
-  })
-  role?: string;
-
-
-  constructor(data?: Partial<Signininvites>) {
+  constructor(data?: Partial<Uploads>) {
     super(data);
   }
 }
 
-export interface SignininvitesRelations {
+export interface UploadsRelations {
   // describe navigational properties here
 }
 
-export type SignininvitesWithRelations = Signininvites & SignininvitesRelations;
+export type UploadsWithRelations = Uploads & UploadsRelations;

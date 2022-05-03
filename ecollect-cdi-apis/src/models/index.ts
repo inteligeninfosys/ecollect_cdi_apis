@@ -8,3 +8,6 @@ export * from './payments.model';
 export * from './users.model';
 export * from './signininvites.model';
 export * from './teles.model';
+export * from './uploads.model';
+export * from './excuse.model';
+export * from './excusedetailed.model';

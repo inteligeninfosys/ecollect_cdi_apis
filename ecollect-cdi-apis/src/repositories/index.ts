@@ -8,3 +8,6 @@ export * from './payments.repository';
 export * from './users.repository';
 export * from './signininvites.repository';
 export * from './teles.repository';
+export * from './uploads.repository';
+export * from './excuse.repository';
+export * from './excusedetailed.repository';

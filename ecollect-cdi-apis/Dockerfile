@@ -27,4 +27,4 @@ ENV HOST=0.0.0.0 PORT=6002
 EXPOSE ${PORT}
 CMD [ "node", "." ]
 
-# docker build -t docker.io/migutak/ecollect-cdi-apis:1.0 .
+# docker build -t docker.io/migutak/ecollect-cdi-apis:1.3 .

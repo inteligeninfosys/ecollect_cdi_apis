@@ -126,6 +126,31 @@ export class Tqall extends Entity {
   })
   lastupdate?: Date;
 
+  @property({
+    type: 'string',
+  })
+  excuse?: string;
+
+  @property({
+    type: 'string',
+  })
+  excusedetails?: string;
+
+  @property({
+    type: 'string',
+  })
+  excuseother?: string;
+
+  @property({
+    type: 'string',
+  })
+  routetostate?: string;
+
+  @property({
+    type: 'string',
+  })
+  accountstatus?: string;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
