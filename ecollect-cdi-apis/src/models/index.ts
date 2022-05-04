@@ -11,3 +11,4 @@ export * from './teles.model';
 export * from './uploads.model';
 export * from './excuse.model';
 export * from './excusedetailed.model';
+export * from './sms.model';

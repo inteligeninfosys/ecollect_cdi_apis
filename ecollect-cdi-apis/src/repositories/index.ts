@@ -11,3 +11,4 @@ export * from './teles.repository';
 export * from './uploads.repository';
 export * from './excuse.repository';
 export * from './excusedetailed.repository';
+export * from './sms.repository';

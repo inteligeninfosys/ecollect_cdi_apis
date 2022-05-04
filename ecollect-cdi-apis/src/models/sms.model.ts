@@ -5,11 +5,11 @@ import {Entity, model, property} from '@loopback/repository';
     strict: true,
     mysql: {
       schema: 'ecol',
-      table: "ptps"
+      table: "sms"
     }
   }
 })
-export class Ptps extends Entity {
+export class Sms extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -20,7 +20,17 @@ export class Ptps extends Entity {
   @property({
     type: 'string',
   })
-  ptpid?: string;
+  message?: string;
+
+  @property({
+    type: 'string',
+  })
+  owner?: string;
+
+  @property({
+    type: 'string',
+  })
+  custnumber?: string;
 
   @property({
     type: 'string',
@@ -30,32 +40,22 @@ export class Ptps extends Entity {
   @property({
     type: 'string',
   })
-  custnumber?: string;
-
-  @property({
-    type: 'number',
-  })
-  ptpamount?: number;
+  sent?: string;
 
   @property({
     type: 'string',
   })
-  ptpdate?: string;
+  totalarrears?: string;
 
   @property({
     type: 'string',
   })
-  owner?: string;
-  
-  @property({
-    type: 'string',
-  })
-  met?: string;
+  telnumber?: string;
 
   @property({
     type: 'string',
   })
-  paymethod?: string;
+  datesent?: string;
 
   @property({
     type: 'date',
@@ -63,28 +63,18 @@ export class Ptps extends Entity {
   stagedate?: string;
 
   @property({
-    type: 'string',
+    type: 'date',
   })
-  ptpdate2?: string;
+  lastupdate?: string;
 
-  @property({
-    type: 'string',
-  })
-  ammendcomment?: string;
 
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
-
-  constructor(data?: Partial<Ptps>) {
+  constructor(data?: Partial<Sms>) {
     super(data);
   }
 }
 
-export interface PtpsRelations {
+export interface SmsRelations {
   // describe navigational properties here
 }
 
-export type PtpsWithRelations = Ptps & PtpsRelations;
+export type SmsWithRelations = Sms & SmsRelations;

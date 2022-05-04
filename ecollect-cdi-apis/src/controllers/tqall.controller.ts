@@ -16,6 +16,19 @@ import {MysqlDataSource} from '../datasources';
 import {TqallRepository} from '../repositories';
 import { inject } from '@loopback/core';
 
+export type tqallbulkdata = {
+  accnumber: string;
+  colofficer: string;
+  currency: string;
+  custname: string;
+  custnumber: string;
+  daysinarr: number;
+  institution: string;
+  oustbalance: number;
+  receiveddate: string;
+  totalarrears: number;
+};
+
 const spec = {
   content: {
     'application/json': {
@@ -158,6 +171,22 @@ export class TqallController {
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.tqallRepository.deleteById(id);
+  }
+
+  //tqallbulk
+  @post('/nodeapi/tqall/tqallbulk', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async tqallbulk
+  (@requestBody() body: Array<tqallbulkdata>): Promise<any> {
+    var inputdata = [body.map(item => [item.accnumber, item.colofficer, item.currency,item.custname,item.custnumber,item.daysinarr,item.institution,item.oustbalance,item.receiveddate,item.totalarrears])]
+    
+    const result = await this.dataSource.execute('insert into tqall (accnumber,colofficer,currency, custname,custnumber,daysinarr,institution,oustbalance,receiveddate,totalarrears) values ?', inputdata)
+    if(result) {
+      return result
+    }
   }
 
   //
