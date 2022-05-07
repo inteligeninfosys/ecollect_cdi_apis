@@ -24,4 +24,13 @@ node {
             app.push("latest")
         }
       }
+
+      stage('Deploy'){
+
+            sh 'sed -i "s, IMAGE_NAME, docker.io/migutak/ecollect-cdi-apis:${env.BUILD_NUMBER}," ecollect-cdi-apis-deployment.yml'
+            sh 'kubectl get pods'
+            sh 'kubectl apply -f  ecollect-cdi-apis-deployment.yml'
+
+        }
+
     }

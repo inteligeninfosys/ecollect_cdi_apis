@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: ecollect-cdi
-        image: docker.io/migutak/ecollect-cdi-apis:1.7
+        image: IMAGE_NAME
         ports:
         - containerPort: 8000
         imagePullPolicy: IfNotPresent
