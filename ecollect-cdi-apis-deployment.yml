@@ -64,13 +64,10 @@ spec:
               name: ecol-secret
               key: DB_USER
         - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ecol-secret
-              key: DB_PASSWORD
+          value: abc.123
         resources:
           requests:
-            memory: "100mi"
+            memory: "100Mi"
             cpu: "100m"
           limits:
             memory: "1Gi"
