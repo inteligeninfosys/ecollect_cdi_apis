@@ -13,3 +13,4 @@ export * from './uploads.controller';
 export * from './excuse.controller';
 export * from './excusedetailed.controller';
 export * from './sms.controller';
+export * from './xlsimports.controller';
