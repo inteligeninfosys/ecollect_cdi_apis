@@ -9,9 +9,9 @@ node {
       }
 
       stage('Test'){
-            steps {
-                 sh 'echo Testing ...'
-            }
+
+            sh 'echo Testing ...'
+
         }
 
       stage('Push image') {
