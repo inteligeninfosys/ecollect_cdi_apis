@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecollect-cdi-svc
+  namespace:
+spec:
+  selector:
+    app: ecollect-cdi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 30010
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecollect-cdi
+  labels:
+    app: ecollect-cdi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecollect-cdi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: ecollect-cdi
+    spec:
+      containers:
+      - name: ecollect-cdi
+        image: docker.io/migutak/ecollect-cdi-apis:1.7
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: ecol-cm
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: ecol-cm
+              key: DB_PORT
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: ecol-cm
+              key: DB_DATABASE
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: ecol-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ecol-secret
+              key: DB_PASSWORD
+        resources:
+          requests:
+            memory: "100mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "100m"
+
