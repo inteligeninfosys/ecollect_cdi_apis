@@ -17,7 +17,7 @@ export class Activitylogs extends Entity {
   })
   id?: number;
 
-  
+
   @property({
     type: 'Date',
   })
@@ -76,17 +76,27 @@ export class Activitylogs extends Entity {
   @property({
     type: 'string',
   })
-  reason?: string;
+  causeofdefault?: string;
 
   @property({
     type: 'string',
   })
-  reasondetails?: string;
+  targetdate?: string;
 
   @property({
     type: 'string',
   })
-  accountstatus?: string;
+  recoverystatus?: string;
+
+  @property({
+    type: 'string',
+  })
+  specificstatus?: string;
+
+  @property({
+    type: 'string',
+  })
+  background?: string;
 
   @property({
     type: 'string',
