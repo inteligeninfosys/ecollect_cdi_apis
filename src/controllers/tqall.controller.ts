@@ -313,6 +313,23 @@ export class TqallController {
     await this.tqallRepository.deleteById(id);
   }
 
+  //searchwithaccount
+  @get('/nodeapi/tqall/searchwithaccount/{accnumber}')
+  @response(200, {
+    content: {
+      'application/json': {
+        schema: getModelSchemaRef(Tqall, {includeRelations: true}),
+      },
+    },
+  })
+  async searchwithaccount(
+    @param.path.string('accnumber') accnumber: string): Promise<any> {
+    const result = await this.dataSource.execute("select * from tqallbanks where LoanAccount='" + accnumber + "'")
+    if (result) {
+      return result
+    }
+  }
+
   //tqallbulk
   @post('/nodeapi/tqall/tqallbulk', {
     responses: {
