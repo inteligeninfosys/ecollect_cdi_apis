@@ -13,3 +13,4 @@ export * from './excuse.model';
 export * from './excusedetailed.model';
 export * from './sms.model';
 export * from './xlsimports.model';
+export * from './import-stanbic.model';

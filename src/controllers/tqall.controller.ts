@@ -1,3 +1,4 @@
+import {inject} from '@loopback/core';
 import {
   Count,
   CountSchema,
@@ -11,10 +12,9 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-import {Tqall} from '../models';
 import {MysqlDataSource} from '../datasources';
+import {Tqall} from '../models';
 import {TqallRepository} from '../repositories';
-import { inject } from '@loopback/core';
 
 export type tqallbulkdata = {
   accnumber: string;
@@ -28,6 +28,146 @@ export type tqallbulkdata = {
   receiveddate: string;
   totalarrears: number;
 };
+
+export type importstanbicdata = {
+  LoanAccount: string;
+  CustomerName: string;
+  CustomerNumber: string;
+  OperativeAccountNumber: string;
+  BusinessUnit: string;
+  DateofWriteoff: string;
+  BranchName: string;
+  EmployerName: string;
+  PreferredPhoneNumber: string;
+  SchemeCode: string;
+  SchemeDescription: string;
+  AccountCurrency: string;
+  LoanAmount: string;
+  lastpaymentdate: string;
+  lastpaymentamount: string;
+  DaysPastDue: string;
+  Aging: string;
+  DateofOutsource: string;
+  TotalArrears: string;
+  InterestSuspenseAmount: string;
+  ExchangeRate: string;
+  BookBalanceLCY: string;
+  DRInterestRate: string;
+  Collector: string;
+  CurrentVendor: string;
+  VendorManager: string;
+  LoanDisbursementDate: string;
+  LoanTerm: string;
+  NextRepaymentAmount: string;
+  ProductType: string;
+  RecoveryStatus: string;
+  SpecificStatus: string;
+  PTPAmount: string;
+  DetailedVendorCommentry: string;
+  CauseofDefault: string;
+  ActionTreatment: string;
+  TargetDate: string;
+  CallBackDate: string;
+  MonthlyProjections: string;
+};
+
+export type importdfcudata = {
+  LoanAccount: string;
+  CustomerNumber: string;
+  CustomerName: string;
+  OperativeAccountNumber: string;
+  LoanType: string;
+  DateOfOutsource: string;
+  PhoneNumber: string;
+  NewContacts: string;
+  Email: string;
+  Occupation: string;
+  ProductType: string;
+  Employer: string;
+  EDC: string;
+  Region: string;
+  Branch: string;
+  AccountCurrency: string;
+  LastPaymentDate: string;
+  DisbursementAmountBase: string;
+  DisbursementDate: string;
+  ExpiryDate: string;
+  ChargeOffDate: string;
+  Collector: string;
+  OutsourcedExposure: string;
+  OutsourcedArrears: string;
+  MonthlyInstallment: string;
+  MonthlyTarget: string;
+  NextDueDate: string;
+  DaysPastDue: string;
+  OutsourcedTarget: string;
+  PrincipalBalanceBase: string;
+  ChargeOffAmnt: string;
+  InterestInSuspenseBase: string;
+  CauseofDefault: string;
+  DetailedVendorCommentry: string;
+  Status: string;
+  MonthlyProjections: string;
+  CallBackDate: string;
+};
+
+export type importboadata = {
+  LoanAccount: string;
+  CustomerName: string;
+  CustomerNumber: string;
+  OperativeAccountNumber: string;
+  Employer: string;
+  DateOfOutsource: string;
+  JobProfile: string;
+  LoanType: string;
+  Contact: string;
+  NewContact: string;
+  Principle: string;
+  Interest: string;
+  OutSourcedBalance: string;
+  Collector: string;
+  DetailedVendorCommentry: string;
+  CauseofDefault: string;
+  ActionTreatment: string;
+  TargetDate: string;
+  CallBackDate: string;
+  MonthlyProjections: string;
+}
+
+export type importequitydata = {
+  LoanAccount: string;
+  CustomerName: string;
+  CustomerNumber: string;
+  OperativeAccountNumber: string;
+  DateOfOutsource: string;
+  Product: string;
+  Employer: string;
+  PhoneNumber: string;
+  Contact: string;
+  NewContact: string;
+  Email: string;
+  AddressLine1: string;
+  AddressLine2: string;
+  LoanAmount: string;
+  Totalarrears: string;
+  AccountCurrency: string;
+  LoanDisbursementAmount: string;
+  DaysPastDue: string;
+  InstallmentAmount: string;
+  ChargeOffDate: string;
+  PrincipleBalance: string;
+  PendingInterest: string;
+  EDC: string;
+  Collector: string;
+  Classification: string;
+  Sector: string;
+  DetailedVendorCommentry: string;
+  CauseofDefault: string;
+  ActionTreatment: string;
+  TargetDate: string;
+  CallBackDate: string;
+  MonthlyProjections: string;
+}
 
 const spec = {
   content: {
@@ -180,11 +320,74 @@ export class TqallController {
     },
   })
   async tqallbulk
-  (@requestBody() body: Array<tqallbulkdata>): Promise<any> {
-    var inputdata = [body.map(item => [item.accnumber, item.colofficer, item.currency,item.custname,item.custnumber,item.daysinarr,item.institution,item.oustbalance,item.receiveddate,item.totalarrears])]
-    
+    (@requestBody() body: Array<tqallbulkdata>): Promise<any> {
+    var inputdata = [body.map(item => [item.accnumber, item.colofficer, item.currency, item.custname, item.custnumber, item.daysinarr, item.institution, item.oustbalance, item.receiveddate, item.totalarrears])]
+
     const result = await this.dataSource.execute('insert into tqall (accnumber,colofficer,currency, custname,custnumber,daysinarr,institution,oustbalance,receiveddate,totalarrears) values ?', inputdata)
-    if(result) {
+    if (result) {
+      return result
+    }
+  }
+
+  //importstanbic
+  @post('/nodeapi/tqall/importstanbic', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async importstanbic
+    (@requestBody() body: Array<importstanbicdata>): Promise<any> {
+    var inputdata = [body.map(item => [item.LoanAccount, item.CustomerName, item.CustomerNumber, item.OperativeAccountNumber, item.BusinessUnit, item.DateofWriteoff, item.BranchName, item.EmployerName, item.PreferredPhoneNumber, item.SchemeCode, item.SchemeDescription, item.AccountCurrency, item.LoanAmount, item.lastpaymentdate, item.lastpaymentamount, item.DaysPastDue, item.Aging, item.DateofOutsource, item.TotalArrears, item.InterestSuspenseAmount, item.ExchangeRate, item.BookBalanceLCY, item.DRInterestRate, item.Collector, item.CurrentVendor, item.VendorManager, item.LoanDisbursementDate, item.LoanTerm, item.NextRepaymentAmount, item.ProductType, item.RecoveryStatus, item.SpecificStatus, item.PTPAmount, item.DetailedVendorCommentry, item.CauseofDefault, item.ActionTreatment, item.TargetDate, item.CallBackDate, item.MonthlyProjections])]
+
+    const result = await this.dataSource.execute('insert into import_stanbic (LoanAccount,CustomerName,CustomerNumber, OperativeAccountNumber,BusinessUnit,DateofWriteoff,BranchName,EmployerName,PreferredPhoneNumber,SchemeCode,SchemeDescription,AccountCurrency,LoanAmount,lastpaymentdate,lastpaymentamount,DaysPastDue,Aging,DateofOutsource,TotalArrears,InterestSuspenseAmount,ExchangeRate,BookBalanceLCY,DRInterestRate,Collector,CurrentVendor,VendorManager,LoanDisbursementDate,LoanTerm,NextRepaymentAmount,ProductType,RecoveryStatus,SpecificStatus,PTPAmount,DetailedVendorCommentry,CauseofDefault,ActionTreatment,TargetDate,CallBackDate,MonthlyProjections) values ?', inputdata)
+    if (result) {
+      return result
+    }
+  }
+
+  //importdfcu
+  @post('/nodeapi/tqall/importdfcu', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async importdfcu
+    (@requestBody() body: Array<importdfcudata>): Promise<any> {
+    var inputdata = [body.map(item => [item.LoanAccount, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.LoanType, item.DateOfOutsource, item.PhoneNumber, item.NewContacts, item.Email, item.Occupation, item.ProductType, item.Employer, item.EDC, item.Region, item.Branch, item.AccountCurrency, item.LastPaymentDate, item.DisbursementAmountBase, item.DisbursementDate, item.ExpiryDate, item.ChargeOffDate, item.Collector, item.OutsourcedExposure, item.OutsourcedArrears, item.MonthlyInstallment, item.MonthlyTarget, item.NextDueDate, item.DaysPastDue, item.OutsourcedTarget, item.PrincipalBalanceBase, item.ChargeOffAmnt, item.InterestInSuspenseBase, item.CauseofDefault, item.DetailedVendorCommentry, item.Status, item.MonthlyProjections, item.CallBackDate])]
+
+    const result = await this.dataSource.execute('insert into import_dfcu (LoanAccount,CustomerNumber,CustomerName,OperativeAccountNumber,LoanType,DateOfOutsource,PhoneNumber,NewContacts,Email,Occupation,ProductType,Employer,EDC,Region,Branch,AccountCurrency,LastPaymentDate,DisbursementAmountBase,DisbursementDate,ExpiryDate,ChargeOffDate,Collector,OutsourcedExposure,OutsourcedArrears,MonthlyInstallment,MonthlyTarget,NextDueDate,DaysPastDue,OutsourcedTarget,PrincipalBalanceBase,ChargeOffAmnt,InterestInSuspenseBase,CauseofDefault,DetailedVendorCommentry,Status,MonthlyProjections,CallBackDate) values ?', inputdata)
+    if (result) {
+      return result
+    }
+  }
+
+  //importboa
+  @post('/nodeapi/tqall/importboa', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async importboa
+    (@requestBody() body: Array<importboadata>): Promise<any> {
+    var inputdata = [body.map(item => [item.LoanAccount, item.CustomerName, item.CustomerNumber, item.OperativeAccountNumber, item.Employer, item.DateOfOutsource, item.JobProfile, item.LoanType, item.Contact, item.NewContact, item.Principle, item.Interest, item.OutSourcedBalance, item.Collector, item.DetailedVendorCommentry, item.CauseofDefault, item.ActionTreatment, item.TargetDate, item.CallBackDate, item.MonthlyProjections])]
+    const result = await this.dataSource.execute('insert into import_boa (LoanAccount,CustomerName,CustomerNumber,OperativeAccountNumber,Employer,DateOfOutsource,JobProfile,LoanType,Contact,NewContact,Principle,Interest,OutSourcedBalance,Collector,DetailedVendorCommentry,CauseofDefault,ActionTreatment,TargetDate,CallBackDate,MonthlyProjections) values ?', inputdata)
+    if (result) {
+      return result
+    }
+  }
+
+  //importequity
+  @post('/nodeapi/tqall/importequity', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async importequity
+    (@requestBody() body: Array<importequitydata>): Promise<any> {
+    var inputdata = [body.map(item => [item.LoanAccount, item.CustomerName, item.CustomerNumber, item.OperativeAccountNumber, item.DateOfOutsource, item.Product, item.Employer, item.PhoneNumber, item.Contact, item.NewContact, item.Email, item.AddressLine1, item.AddressLine2, item.LoanAmount, item.Totalarrears, item.AccountCurrency, item.LoanDisbursementAmount, item.DaysPastDue, item.InstallmentAmount, item.ChargeOffDate, item.PrincipleBalance, item.PendingInterest, item.EDC, item.Collector, item.Classification, item.Sector, item.DetailedVendorCommentry, item.CauseofDefault, item.ActionTreatment, item.TargetDate, item.CallBackDate, item.MonthlyProjections])]
+
+    const result = await this.dataSource.execute('insert into import_equity (LoanAccount,CustomerName,CustomerNumber,OperativeAccountNumber,DateOfOutsource,Product,Employer,PhoneNumber,Contact,NewContact,Email,AddressLine1,AddressLine2,LoanAmount,Totalarrears,AccountCurrency,LoanDisbursementAmount,DaysPastDue,InstallmentAmount,ChargeOffDate,PrincipleBalance,PendingInterest,EDC,Collector,Classification,Sector,DetailedVendorCommentry,CauseofDefault,ActionTreatment,TargetDate,CallBackDate,MonthlyProjections) values ?', inputdata)
+    if (result) {
       return result
     }
   }
@@ -208,7 +411,7 @@ export class TqallController {
 
   buildSql(request: any) {
     const selectSql = this.createSelectSql(request);
-    const fromSql = ' from ecol.tqall ';
+    const fromSql = ' from ecol.tqallbanks ';
     const whereSql = this.createWhereSql(request);
     const limitSql = this.createLimitSql(request);
 
@@ -389,7 +592,7 @@ export class TqallController {
     const pageSize = endRow - startRow;
 
     //return ' OFFSET ' + startRow + ' ROWS FETCH NEXT ' + (pageSize + 1) + ' ROWS only'
-     return ' limit ' + (pageSize + 1) + ' offset ' + startRow;
+    return ' limit ' + (pageSize + 1) + ' offset ' + startRow;
   }
 
 
