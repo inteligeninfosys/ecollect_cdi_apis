@@ -14,3 +14,4 @@ export * from './excusedetailed.repository';
 export * from './sms.repository';
 export * from './xlsimports.repository';
 export * from './import-stanbic.repository';
+export * from './tblportfolio-static.repository';

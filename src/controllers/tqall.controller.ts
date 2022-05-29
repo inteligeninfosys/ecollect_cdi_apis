@@ -71,6 +71,49 @@ export type importstanbicdata = {
   MonthlyProjections: string;
 };
 
+export type importgeneraldata = {
+  Bank: string;
+  LoanAccount: string;
+  CustomerName: string;
+  CustomerNumber: string;
+  OperativeAccountNumber: string;
+  BusinessUnit: string;
+  DateofWriteoff: string;
+  BranchName: string;
+  EmployerName: string;
+  PreferredPhoneNumber: string;
+  SchemeCode: string;
+  SchemeDescription: string;
+  AccountCurrency: string;
+  LoanAmount: string;
+  lastpaymentdate: string;
+  lastpaymentamount: string;
+  DaysPastDue: string;
+  Aging: string;
+  DateofOutsource: string;
+  TotalArrears: string;
+  InterestSuspenseAmount: string;
+  ExchangeRate: string;
+  BookBalanceLCY: string;
+  DRInterestRate: string;
+  Collector: string;
+  CurrentVendor: string;
+  VendorManager: string;
+  LoanDisbursementDate: string;
+  LoanTerm: string;
+  NextRepaymentAmount: string;
+  ProductType: string;
+  RecoveryStatus: string;
+  SpecificStatus: string;
+  PTPAmount: string;
+  DetailedVendorCommentry: string;
+  CauseofDefault: string;
+  ActionTreatment: string;
+  TargetDate: string;
+  CallBackDate: string;
+  MonthlyProjections: string;
+};
+
 export type importdfcudata = {
   LoanAccount: string;
   CustomerNumber: string;
@@ -341,6 +384,22 @@ export class TqallController {
     var inputdata = [body.map(item => [item.accnumber, item.colofficer, item.currency, item.custname, item.custnumber, item.daysinarr, item.institution, item.oustbalance, item.receiveddate, item.totalarrears])]
 
     const result = await this.dataSource.execute('insert into tqall (accnumber,colofficer,currency, custname,custnumber,daysinarr,institution,oustbalance,receiveddate,totalarrears) values ?', inputdata)
+    if (result) {
+      return result
+    }
+  }
+
+  //importstanbic
+  @post('/nodeapi/tqall/importgeneral', {
+    responses: {
+      '200': spec,
+    },
+  })
+  async importgeneral
+    (@requestBody() body: Array<importgeneraldata>): Promise<any> {
+    var inputdata = [body.map(item => [item.Bank, item.LoanAccount, item.CustomerName, item.CustomerNumber, item.OperativeAccountNumber, item.BusinessUnit, item.DateofWriteoff, item.BranchName, item.EmployerName, item.PreferredPhoneNumber, item.SchemeCode, item.SchemeDescription, item.AccountCurrency, item.LoanAmount, item.lastpaymentdate, item.lastpaymentamount, item.DaysPastDue, item.Aging, item.DateofOutsource, item.TotalArrears, item.InterestSuspenseAmount, item.ExchangeRate, item.BookBalanceLCY, item.DRInterestRate, item.Collector, item.CurrentVendor, item.VendorManager, item.LoanDisbursementDate, item.LoanTerm, item.NextRepaymentAmount, item.ProductType, item.RecoveryStatus, item.SpecificStatus, item.PTPAmount, item.DetailedVendorCommentry, item.CauseofDefault, item.ActionTreatment, item.TargetDate, item.CallBackDate, item.MonthlyProjections])]
+
+    const result = await this.dataSource.execute('insert into import_general (Bank,LoanAccount,CustomerName,CustomerNumber, OperativeAccountNumber,BusinessUnit,DateofWriteoff,BranchName,EmployerName,PreferredPhoneNumber,SchemeCode,SchemeDescription,AccountCurrency,LoanAmount,lastpaymentdate,lastpaymentamount,DaysPastDue,Aging,DateofOutsource,TotalArrears,InterestSuspenseAmount,ExchangeRate,BookBalanceLCY,DRInterestRate,Collector,CurrentVendor,VendorManager,LoanDisbursementDate,LoanTerm,NextRepaymentAmount,ProductType,RecoveryStatus,SpecificStatus,PTPAmount,DetailedVendorCommentry,CauseofDefault,ActionTreatment,TargetDate,CallBackDate,MonthlyProjections) values ?', inputdata)
     if (result) {
       return result
     }

@@ -15,3 +15,4 @@ export * from './excusedetailed.controller';
 export * from './sms.controller';
 export * from './xlsimports.controller';
 export * from './importstanbic.controller';
+export * from './tblportfoliostatic.controller';
