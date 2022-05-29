@@ -407,7 +407,7 @@ export class TqallController {
     (@requestBody() body: Array<importaccountsdata>): Promise<any> {
     var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus])]
 
-    const result = await this.dataSource.execute('insert into tqall (loanaccount,bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus) values ?', inputdata)
+    const result = await this.dataSource.execute('insert into import_accounts (loanaccount,bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus) values ?', inputdata)
     if (result) {
       return result
     }
