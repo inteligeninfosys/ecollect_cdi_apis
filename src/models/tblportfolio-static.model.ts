@@ -99,6 +99,11 @@ export class TblportfolioStatic extends Entity {
   })
   remarksstatus?: string;
 
+  @property({
+    type: 'string',
+  })
+  routetoreview?: string;
+
 
   constructor(data?: Partial<TblportfolioStatic>) {
     super(data);
