@@ -212,6 +212,30 @@ export type importequitydata = {
   MonthlyProjections: string;
 }
 
+export type importaccountsdata = {
+  LoanAccount: string;
+  CustomerNumber: string;
+  Bank: string;
+  Collector: string;
+  CustomerName: string;
+  OperativeAccountNumber: string;
+  ProductType: string;
+  Contact: string;
+  AlternativeContact: string;
+  Employer: string;
+  BranchName: string;
+  DateofWriteoff: string;
+  DisbursmentDate: string;
+  DisbursmentAmount: string;
+  LastPaymentDate: string;
+  TotalExposure: number;
+  TotalArrears: number;
+  OutstandingExposureWithCommission: number;
+  OutstandingArrearsWithCommission: number;
+  PreviousMonthComment: string;
+  PreviousMonthStatus: string;
+}
+
 const spec = {
   content: {
     'application/json': {
@@ -373,17 +397,17 @@ export class TqallController {
     }
   }
 
-  //tqallbulk
-  @post('/nodeapi/tqall/tqallbulk', {
+  //importaccounts
+  @post('/nodeapi/tqall/importaccounts', {
     responses: {
       '200': spec,
     },
   })
-  async tqallbulk
-    (@requestBody() body: Array<tqallbulkdata>): Promise<any> {
-    var inputdata = [body.map(item => [item.accnumber, item.colofficer, item.currency, item.custname, item.custnumber, item.daysinarr, item.institution, item.oustbalance, item.receiveddate, item.totalarrears])]
+  async importaccounts
+    (@requestBody() body: Array<importaccountsdata>): Promise<any> {
+    var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus])]
 
-    const result = await this.dataSource.execute('insert into tqall (accnumber,colofficer,currency, custname,custnumber,daysinarr,institution,oustbalance,receiveddate,totalarrears) values ?', inputdata)
+    const result = await this.dataSource.execute('insert into tqall (loanaccount,bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus) values ?', inputdata)
     if (result) {
       return result
     }
