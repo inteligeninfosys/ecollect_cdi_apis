@@ -3,6 +3,7 @@ import {ApplicationConfig, EcollectCdiApisApplication} from './application';
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
+  options.rest = {requestBodyParser: {json: {limit: '6MB'}}};
   const app = new EcollectCdiApisApplication(options);
   await app.boot();
   await app.start();
