@@ -71,7 +71,7 @@ export class Activitylogs extends Entity {
   @property({
     type: 'string',
   })
-  reviewdate?: string;
+  followupdate?: string;
 
   @property({
     type: 'string',
@@ -152,7 +152,6 @@ export class Activitylogs extends Entity {
     type: 'boolean',
   })
   callbackscheduleflag?: boolean;
-
 
   [prop: string]: any;
 
