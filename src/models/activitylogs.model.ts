@@ -91,6 +91,21 @@ export class Activitylogs extends Entity {
   @property({
     type: 'string',
   })
+  RemarksStatus?: string;
+
+  @property({
+    type: 'string',
+  })
+  CurrentStrategyComment?: string;
+
+  @property({
+    type: 'string',
+  })
+  DetailedVendorComments?: string;
+
+  @property({
+    type: 'string',
+  })
   specificstatus?: string;
 
   @property({
