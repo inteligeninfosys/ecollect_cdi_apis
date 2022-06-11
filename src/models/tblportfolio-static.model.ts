@@ -104,6 +104,13 @@ export class TblportfolioStatic extends Entity {
   })
   routetoreview?: string;
 
+  @property({
+    type: 'string',
+  })
+  recoveryprojection?: string;
+
+
+
 
   constructor(data?: Partial<TblportfolioStatic>) {
     super(data);

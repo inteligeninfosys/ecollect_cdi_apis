@@ -168,6 +168,11 @@ export class Activitylogs extends Entity {
   })
   callbackscheduleflag?: boolean;
 
+  @property({
+    type: 'string',
+  })
+  recoveryprojection?: string;
+
   [prop: string]: any;
 
   constructor(data?: Partial<Activitylogs>) {
