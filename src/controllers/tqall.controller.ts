@@ -380,6 +380,23 @@ export class TqallController {
     await this.tqallRepository.deleteById(id);
   }
 
+  //myallocation
+  @get('/nodeapi/tqall/myallocation/{colofficer}')
+  @response(200, {
+    content: {
+      'application/json': {
+        schema: getModelSchemaRef(Tqall, {includeRelations: true}),
+      },
+    },
+  })
+  async myallocation(
+    @param.path.string('colofficer') colofficer: string): Promise<any> {
+    const result = await this.dataSource.execute("select * from tqallbanks where upper(collector)='" + colofficer + "'")
+    if (result) {
+      return result
+    }
+  }
+
   //searchwithaccount
   @get('/nodeapi/tqall/searchwithaccount/{accnumber}')
   @response(200, {
