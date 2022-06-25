@@ -234,6 +234,10 @@ export type importaccountsdata = {
   OutstandingArrearsWithCommission: number;
   PreviousMonthComment: string;
   PreviousMonthStatus: string;
+  Currency: string;
+  DaysPastDue: string;
+  Dateofoutsource: string;
+  LastPaymentAmt: string;
 }
 
 const spec = {
@@ -422,29 +426,14 @@ export class TqallController {
   })
   async importaccounts
     (@requestBody() body: Array<importaccountsdata>): Promise<any> {
-    var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus])]
+    var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus, item.Currency, item.DaysPastDue, item.Dateofoutsource, item.LastPaymentAmt])]
 
-    const result = await this.dataSource.execute('insert into import_accounts (loanAccount,Bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus) values ?', inputdata)
+    const result = await this.dataSource.execute('insert into import_accounts (loanAccount,Bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus,Currency,DaysPastDue,Dateofoutsource,LastPaymentAmt) values ?', inputdata)
     if (result) {
       return result
     }
   }
 
-  //importstanbic
-  @post('/nodeapi/tqall/importgeneral', {
-    responses: {
-      '200': spec,
-    },
-  })
-  async importgeneral
-    (@requestBody() body: Array<importgeneraldata>): Promise<any> {
-    var inputdata = [body.map(item => [item.Bank, item.LoanAccount, item.CustomerName, item.CustomerNumber, item.OperativeAccountNumber, item.BusinessUnit, item.DateofWriteoff, item.BranchName, item.EmployerName, item.PreferredPhoneNumber, item.SchemeCode, item.SchemeDescription, item.AccountCurrency, item.LoanAmount, item.lastpaymentdate, item.lastpaymentamount, item.DaysPastDue, item.Aging, item.DateofOutsource, item.TotalArrears, item.InterestSuspenseAmount, item.ExchangeRate, item.BookBalanceLCY, item.DRInterestRate, item.Collector, item.CurrentVendor, item.VendorManager, item.LoanDisbursementDate, item.LoanTerm, item.NextRepaymentAmount, item.ProductType, item.RecoveryStatus, item.SpecificStatus, item.PTPAmount, item.DetailedVendorCommentry, item.CauseofDefault, item.ActionTreatment, item.TargetDate, item.CallBackDate, item.MonthlyProjections])]
-
-    const result = await this.dataSource.execute('insert into import_general (Bank,LoanAccount,CustomerName,CustomerNumber, OperativeAccountNumber,BusinessUnit,DateofWriteoff,BranchName,EmployerName,PreferredPhoneNumber,SchemeCode,SchemeDescription,AccountCurrency,LoanAmount,lastpaymentdate,lastpaymentamount,DaysPastDue,Aging,DateofOutsource,TotalArrears,InterestSuspenseAmount,ExchangeRate,BookBalanceLCY,DRInterestRate,Collector,CurrentVendor,VendorManager,LoanDisbursementDate,LoanTerm,NextRepaymentAmount,ProductType,RecoveryStatus,SpecificStatus,PTPAmount,DetailedVendorCommentry,CauseofDefault,ActionTreatment,TargetDate,CallBackDate,MonthlyProjections) values ?', inputdata)
-    if (result) {
-      return result
-    }
-  }
 
   //importstanbic
   @post('/nodeapi/tqall/importstanbic', {
