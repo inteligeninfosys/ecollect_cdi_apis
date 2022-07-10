@@ -16,3 +16,5 @@ export * from './sms.controller';
 export * from './xlsimports.controller';
 export * from './importstanbic.controller';
 export * from './tblportfoliostatic.controller';
+export * from './otherremarkshistory.controller';
+export * from './vendorcommentshistory.controller';

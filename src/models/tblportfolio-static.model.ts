@@ -92,7 +92,7 @@ export class TblportfolioStatic extends Entity {
   @property({
     type: 'string',
   })
-  currentstrategycomment?: string;
+  otherremarks?: string;
 
   @property({
     type: 'string',
