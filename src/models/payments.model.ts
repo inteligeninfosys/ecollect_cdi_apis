@@ -105,6 +105,26 @@ export class Payments extends Entity {
   })
   stagedate?: string;
 
+  @property({
+    type: 'string',
+  })
+  referenceno?: string;
+
+  @property({
+    type: 'string',
+  })
+  confirmed?: string;
+
+  @property({
+    type: 'string',
+  })
+  confirmedby?: string;
+
+  @property({
+    type: 'string',
+  })
+  confirmationdate?: string;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data

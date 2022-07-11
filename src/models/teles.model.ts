@@ -21,13 +21,13 @@ export class Teles extends Entity {
     type: 'string',
     required: true,
   })
-  custnumber: string;
+  loanaccount: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  contacttype: string;
+  contactnumber: string;
 
   @property({
     type: 'string',
@@ -38,12 +38,12 @@ export class Teles extends Entity {
   @property({
     type: 'string',
   })
-  address?: string;
+  email?: string;
 
   @property({
     type: 'string',
   })
-  telnumber?: string;
+  address?: string;
 
   @property({
     type: 'string',
