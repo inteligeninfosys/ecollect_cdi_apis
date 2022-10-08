@@ -17,3 +17,4 @@ export * from './import-stanbic.repository';
 export * from './tblportfolio-static.repository';
 export * from './otherremarkshistory.repository';
 export * from './vendorcommentshistory.repository';
+export * from './import-accounts.repository';

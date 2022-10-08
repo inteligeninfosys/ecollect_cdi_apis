@@ -17,3 +17,4 @@ export * from './import-stanbic.model';
 export * from './tblportfolio-static.model';
 export * from './otherremarkshistory.model';
 export * from './vendorcommentshistory.model';
+export * from './import-accounts.model';
