@@ -238,6 +238,8 @@ export type importaccountsdata = {
   DaysPastDue: string;
   Dateofoutsource: string;
   LastPaymentAmt: string;
+  Principal: string;
+  Interest: string;
 }
 
 const spec = {
@@ -426,9 +428,9 @@ export class TqallController {
   })
   async importaccounts
     (@requestBody() body: Array<importaccountsdata>): Promise<any> {
-    var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus, item.Currency, item.DaysPastDue, item.Dateofoutsource, item.LastPaymentAmt])]
+    var inputdata = [body.map(item => [item.LoanAccount, item.Bank, item.Collector, item.CustomerNumber, item.CustomerName, item.OperativeAccountNumber, item.ProductType, item.Contact, item.AlternativeContact, item.Employer, item.BranchName, item.DateofWriteoff, item.DisbursmentDate, item.DisbursmentAmount, item.LastPaymentDate, item.TotalExposure, item.TotalArrears, item.OutstandingExposureWithCommission, item.OutstandingArrearsWithCommission, item.PreviousMonthComment, item.PreviousMonthStatus, item.Currency, item.DaysPastDue, item.Dateofoutsource, item.LastPaymentAmt, item.Principal, item.Interest])]
 
-    const result = await this.dataSource.execute('insert into import_accounts (loanAccount,Bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus,Currency,DaysPastDue,Dateofoutsource,LastPaymentAmt) values ?', inputdata)
+    const result = await this.dataSource.execute('insert into import_accounts (loanAccount,Bank,Collector,CustomerNumber,CustomerName,OperativeAccountNumber,ProductType,Contact,AlternativeContact,Employer,BranchName,DateofWriteoff,DisbursmentDate,DisbursmentAmount,LastPaymentDate,TotalExposure,TotalArrears,OutstandingExposureWithCommission,OutstandingArrearsWithCommission,PreviousMonthComment,PreviousMonthStatus,Currency,DaysPastDue,Dateofoutsource,LastPaymentAmt,Principal,Interest) values ?', inputdata)
     if (result) {
       return result
     }
